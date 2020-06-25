@@ -19,8 +19,8 @@ Resources:
   CreateTripRecordFunction:
     Type: AWS::Serverless::Function
     Properties:
-     CodeUri: target/onpaty-0.0.1-SNAPSHOT-jar-with-dependencies.jar
-     Handler: br.com.iwe.handler.CreateTripRecord::handleRequest
+     CodeUri: ./target/onpaty-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+     Handler: br.com.rws.handler.CreateTripRecord::handleRequest
      Runtime: java8
      Policies:
        - DynamoDBCrudPolicy:
