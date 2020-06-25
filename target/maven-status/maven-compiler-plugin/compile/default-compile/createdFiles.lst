@@ -1,0 +1,10 @@
+br\com\rws\models\HandlerRequest.class
+br\com\rws\models\HandlerResponse$Builder.class
+br\com\rws\DAO\DynamoDBManager.class
+br\com\rws\handler\CreateTripRecord.class
+br\com\rws\models\Trip.class
+br\com\rws\handler\GetTripsByCountry.class
+br\com\rws\handler\GetTripsByPeriod.class
+br\com\rws\models\HandlerResponse.class
+br\com\rws\DAO\TripRepository.class
+br\com\rws\handler\GetTripsByCity.class
