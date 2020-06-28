@@ -19,69 +19,64 @@ public class TripRepository {
 		return trip;
 	}
 
-	public List<Trip> findByPeriod(final String topic, final String starts, final String ends) {
+	public List<Trip> findByPeriod(final String trip, final String starts, final String ends) {
 
-		/*
-		 * final Map<String, AttributeValue> eav = new HashMap<String,
-		 * AttributeValue>(); eav.put(":val1", new AttributeValue().withS(topic));
-		 * eav.put(":val2", new AttributeValue().withS(starts)); eav.put(":val3", new
-		 * AttributeValue().withS(ends));
-		 * 
-		 * final DynamoDBQueryExpression<Study> queryExpression = new
-		 * DynamoDBQueryExpression<Study>()
-		 * .withKeyConditionExpression("topic = :val1 and dateTimeCreation between :val2 and :val3"
-		 * ) .withExpressionAttributeValues(eav);
-		 * 
-		 * final List<Study> studies = mapper.query(Study.class, queryExpression);
-		 * 
-		 * return studies;
-		 */
-		return null;
+
+		  final Map<String, AttributeValue> eav = new HashMap<String,
+		  AttributeValue>(); eav.put(":val1", new AttributeValue().withS(trip));
+		  eav.put(":val2", new AttributeValue().withS(starts)); eav.put(":val3", new
+		  AttributeValue().withS(ends));
+
+		  final DynamoDBQueryExpression<Trip> queryExpression = new
+		  DynamoDBQueryExpression<Trip>()
+		  .withKeyConditionExpression("trip = :val1 and dateTimeCreation between :val2 and :val3"
+		  ) .withExpressionAttributeValues(eav);
+
+		  final List<Trip> studies = mapper.query(Trip.class, queryExpression);
+
+		  return studies;
+
+
 		 
 	}
 
-	public List<Trip> findByTag(final String topic, final String tag) {
+	public List<Trip> findByCity(final String trip, final String city) {
 
-		/*
-		 * final Map<String, AttributeValue> eav = new HashMap<String,
-		 * AttributeValue>(); eav.put(":val1", new AttributeValue().withS(topic));
-		 * eav.put(":val2", new AttributeValue().withS(tag));
-		 * 
-		 * final DynamoDBQueryExpression<Study> queryExpression = new
-		 * DynamoDBQueryExpression<Study>()
-		 * .withIndexName("tagIndex").withConsistentRead(false)
-		 * .withKeyConditionExpression("topic = :val1 and tag=:val2").
-		 * withExpressionAttributeValues(eav);
-		 * 
-		 * final List<Study> studies = mapper.query(Study.class, queryExpression);
-		 * 
-		 * return studies;
-		 */
-		return null;
+
+		  final Map<String, AttributeValue> eav = new HashMap<String,
+		  AttributeValue>(); eav.put(":val1", new AttributeValue().withS(trip));
+		  eav.put(":val2", new AttributeValue().withS(city));
+
+		  final DynamoDBQueryExpression<Trip> queryExpression = new
+		  DynamoDBQueryExpression<Trip>()
+		  .withIndexName("tagIndex").withConsistentRead(false)
+		  .withKeyConditionExpression("topic = :val1 and tag=:val2").
+		  withExpressionAttributeValues(eav);
+
+		  final List<Trip> trips = mapper.query(Trip.class, queryExpression);
+
+		  return trips;
+
+
 	}
 
-	public List<Trip> findByIsConsumed(final String topic, final String isConsumed) {
+	public List<Trip> findByCountry(final String trip, final String country) {
 
-		/*
-		 * final Map<String, AttributeValue> eav = new HashMap<String,
-		 * AttributeValue>(); eav.put(":val1", new AttributeValue().withS(topic));
-		 * eav.put(":val2", new AttributeValue().withS(isConsumed));
-		 * 
-		 * final Map<String, String> expression = new HashMap<>();
-		 * 
-		 * // consumed is a reserver word in DynamoDB expression.put("#consumed",
-		 * "consumed");
-		 * 
-		 * final DynamoDBQueryExpression<Study> queryExpression = new
-		 * DynamoDBQueryExpression<Study>()
-		 * .withIndexName("consumedIndex").withConsistentRead(false)
-		 * .withKeyConditionExpression("topic = :val1 and #consumed=:val2").
-		 * withExpressionAttributeValues(eav) .withExpressionAttributeNames(expression);
-		 * 
-		 * final List<Study> studies = mapper.query(Study.class, queryExpression);
-		 * 
-		 * return studies;
-		 */
-		return null;
+
+		  final Map<String, AttributeValue> eav = new HashMap<String,
+		  AttributeValue>(); eav.put(":val1", new AttributeValue().withS(trip));
+		  eav.put(":val2", new AttributeValue().withS(country));
+
+		  final DynamoDBQueryExpression<Trip> queryExpression = new
+		  DynamoDBQueryExpression<Trip>()
+		  .withIndexName("tagIndex").withConsistentRead(false)
+		  .withKeyConditionExpression("topic = :val1 and tag=:val2").
+		  withExpressionAttributeValues(eav);
+
+		  final List<Trip> trips = mapper.query(Trip.class, queryExpression);
+
+		  return trips;
+
 	}
+
 }
