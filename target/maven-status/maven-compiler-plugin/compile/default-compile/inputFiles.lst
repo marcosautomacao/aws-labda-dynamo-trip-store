@@ -1,9 +1,0 @@
-C:\Users\Zupper\eclipse-workspace\onpaty\src\main\java\br\com\rws\DAO\DynamoDBManager.java
-C:\Users\Zupper\eclipse-workspace\onpaty\src\main\java\br\com\rws\handler\CreateTripRecord.java
-C:\Users\Zupper\eclipse-workspace\onpaty\src\main\java\br\com\rws\models\HandlerResponse.java
-C:\Users\Zupper\eclipse-workspace\onpaty\src\main\java\br\com\rws\handler\GetTripsByCountry.java
-C:\Users\Zupper\eclipse-workspace\onpaty\src\main\java\br\com\rws\models\Trip.java
-C:\Users\Zupper\eclipse-workspace\onpaty\src\main\java\br\com\rws\handler\GetTripsByCity.java
-C:\Users\Zupper\eclipse-workspace\onpaty\src\main\java\br\com\rws\models\HandlerRequest.java
-C:\Users\Zupper\eclipse-workspace\onpaty\src\main\java\br\com\rws\DAO\TripRepository.java
-C:\Users\Zupper\eclipse-workspace\onpaty\src\main\java\br\com\rws\handler\GetTripsByPeriod.java
