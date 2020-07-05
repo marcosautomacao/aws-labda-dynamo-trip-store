@@ -20,13 +20,18 @@ public class CreateTripRecord implements RequestHandler<HandlerRequest, HandlerR
 		System.out.println("fakfdsafgaldflajdfljasndfljansd");
 		Trip trip = null;
 		try {
+			System.out.println(request.getBody());
 			trip = new ObjectMapper().readValue(request.getBody(), Trip.class);
 		} catch (IOException e) {
-			return HandlerResponse.builder().setStatusCode(400).setRawBody("There is a error in your Trip!").build();
+			return HandlerResponse.builder().setStatusCode(400).setRawBody("There is a error in your Trip! >>" + e.getMessage()).build();
 		}
+		try {
 		context.getLogger().log("Creating a new trip record for the city " + trip.getCity());
 		final Trip tripRecorded = repository.save(trip);
 		return HandlerResponse.builder().setStatusCode(201).setObjectBody(tripRecorded).build();
+		} catch (Exception e) {
+			return HandlerResponse.builder().setStatusCode(400).setRawBody("There is a error in persistence >>" + e.getMessage()).build();
+		}
 	}
 
 }

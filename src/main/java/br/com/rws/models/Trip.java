@@ -21,11 +21,16 @@ public class Trip {
     private String reason;
 
     public Trip(String country, String city, String date, String reason) {
+        super();
         this.country = country;
         this.city = city;
         this.date = date;
         this.reason = reason;
     }
+
+    public Trip() {
+		super();
+	}
 
     public String getCountry() {
         return country;

@@ -7,7 +7,7 @@ Description: >
 
 Globals:
     Function:
-        Timeout: 20
+        Timeout: 50
         MemorySize: 512
         Environment:
           Variables:
@@ -15,7 +15,24 @@ Globals:
             ENDPOINT_OVERRIDE: ""
 
 Resources:
-
+  
+  GetTripsByCityFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+     CodeUri: ./target/onpaty-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+     Handler: br.com.rws.handler.GetTripsByCity::handleRequest
+     Runtime: java8
+     Policies:
+       - DynamoDBCrudPolicy:
+           TableName: !Ref TripTable     
+     Events:
+       CreateTripRecord:
+         Type: Api
+         Properties:
+           Path: /trip/{city}
+           Method: get
+           RequestParameters:
+            - method.request.querystring.city
   CreateTripRecordFunction:
     Type: AWS::Serverless::Function
     Properties:

@@ -40,24 +40,24 @@ public class TripRepository {
 		 
 	}
 
-	public List<Trip> findByCity(final String trip, final String city) {
+	public List<Trip> findByCity(final String city) {
 
 
-		  final Map<String, AttributeValue> eav = new HashMap<String,
-		  AttributeValue>(); eav.put(":val1", new AttributeValue().withS(trip));
-		  eav.put(":val2", new AttributeValue().withS(city));
+		  final Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+		  eav.put(":val1", new AttributeValue().withS(city));
+		
+		  System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");	
 
 		  final DynamoDBQueryExpression<Trip> queryExpression = new
 		  DynamoDBQueryExpression<Trip>()
-		  .withIndexName("tagIndex").withConsistentRead(false)
-		  .withKeyConditionExpression("topic = :val1 and tag=:val2").
+		  .withKeyConditionExpression("country = :val1").
 		  withExpressionAttributeValues(eav);
+
+		  System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");	
 
 		  final List<Trip> trips = mapper.query(Trip.class, queryExpression);
 
 		  return trips;
-
-
 	}
 
 	public List<Trip> findByCountry(final String trip, final String country) {

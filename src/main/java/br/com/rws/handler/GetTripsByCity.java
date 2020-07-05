@@ -18,20 +18,21 @@ public class GetTripsByCity implements RequestHandler<HandlerRequest, HandlerRes
 	@Override
 	public HandlerResponse handleRequest(HandlerRequest request, Context context) {
 
-		final String trip = request.getPathParameters().get("trip");
-		final String citi = request.getPathParameters().get("citi");
+		final String city = request.getPathParameters().get("city");
 
-		context.getLogger().log("Buscano por viagems " + trip + " e cidade = " + citi);
+		context.getLogger().log("Buscando por viagens para a cidade = " + city);
 
-		final List<Trip> trips = this.repository.findByCity(trip, citi);
+		try {
+
+		final List<Trip> trips = this.repository.findByCity(city);
 
 		if (trips == null || trips.isEmpty()) {
 			return HandlerResponse.builder().setStatusCode(404).build();
 		}
-
 		return HandlerResponse.builder().setStatusCode(200).setObjectBody(trips).build();
-
-
+	} catch (Exception e) {
+		return HandlerResponse.builder().setStatusCode(400).setRawBody("There is a error in persistence >>" + e.getMessage()).build();
+	}
 	}
 
 }
