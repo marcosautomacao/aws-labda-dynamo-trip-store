@@ -18,13 +18,14 @@ public class GetTripsByCity implements RequestHandler<HandlerRequest, HandlerRes
 	@Override
 	public HandlerResponse handleRequest(HandlerRequest request, Context context) {
 
+		final String country = request.getPathParameters().get("country");
 		final String city = request.getPathParameters().get("city");
 
 		context.getLogger().log("Buscando por viagens para a cidade = " + city);
 
 		try {
 
-			final List<Trip> trips = this.repository.findByCity(city);
+			final List<Trip> trips = this.repository.findByCity(city, country);
 
 			if (trips == null || trips.isEmpty()) {
 				return HandlerResponse.builder().setStatusCode(404).build();

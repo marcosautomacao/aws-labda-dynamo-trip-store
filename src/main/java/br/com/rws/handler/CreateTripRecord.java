@@ -16,12 +16,10 @@ public class CreateTripRecord implements RequestHandler<HandlerRequest, HandlerR
 	
 	@Override
 	public HandlerResponse handleRequest(HandlerRequest request, Context context) {
-		context.getLogger().log("Creating a new trip record for the city ");
-		System.out.println("fakfdsafgaldflajdfljasndfljansd");
 		Trip trip = null;
-		try {
-			System.out.println(request.getBody());
+		try {			
 			trip = new ObjectMapper().readValue(request.getBody(), Trip.class);
+			context.getLogger().log("Creating a new trip record for the city " + trip.getCity());
 		} catch (IOException e) {
 			return HandlerResponse.builder().setStatusCode(400).setRawBody("There is a error in your Trip! >>" + e.getMessage()).build();
 		}

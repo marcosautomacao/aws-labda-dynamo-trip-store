@@ -29,9 +29,10 @@ Resources:
        CreateTripRecord:
          Type: Api
          Properties:
-           Path: /trip/{city}
+           Path: /trip/{country}/{city}
            Method: get
            RequestParameters:
+            - method.request.querystring.country
             - method.request.querystring.city
   GetTripsByCountryFunction:
     Type: AWS::Serverless::Function
@@ -50,6 +51,24 @@ Resources:
            Method: get
            RequestParameters:
             - method.request.querystring.country  
+  GetTripsByPeriodFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+     CodeUri: ./target/onpaty-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+     Handler: br.com.rws.handler.GetTripsByPeriod::handleRequest
+     Runtime: java8
+     Policies:
+       - DynamoDBCrudPolicy:
+           TableName: !Ref TripTable     
+     Events:
+       CreateTripRecord:
+         Type: Api
+         Properties:
+           Path: /trip/{country}/findByPeriod
+           Method: get
+           RequestParameters:
+            - method.request.querystring.starts
+            - method.request.querystring.ends
   CreateTripRecordFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -75,14 +94,14 @@ Resources:
           AttributeType: S
         - AttributeName: city
           AttributeType: S
-        - AttributeName: date
+        - AttributeName: dateTrip
           AttributeType: S
         - AttributeName: reason
           AttributeType: S            
       KeySchema:
         - AttributeName: country
           KeyType: HASH
-        - AttributeName: date
+        - AttributeName: dateTrip
           KeyType: RANGE
       LocalSecondaryIndexes: 
         - IndexName: tagIndex
@@ -108,5 +127,9 @@ Outputs:
     CreateTripRecordFunction:
       Description: "CreateTripRecord Lambda Function ARN"
       Value: !GetAtt CreateTripRecordFunction.Arn
+
+    GetStudyRecordsByPeriodFunction:
+      Description: "GetTripsByPeriod Lambda Function ARN"
+      Value: !GetAtt GetTripsByPeriodFunction.Arn
   
      
