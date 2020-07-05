@@ -12,25 +12,27 @@ import java.util.List;
 
 public class GetTripsByCountry implements RequestHandler<HandlerRequest, HandlerResponse>{
 
+
 	private final TripRepository repository = new TripRepository();
 
 	@Override
 	public HandlerResponse handleRequest(HandlerRequest request, Context context) {
 
-		final String trip = request.getPathParameters().get("trip");
 		final String country = request.getPathParameters().get("country");
 
-		context.getLogger().log("Buscano por viagems " + trip + " e país = " + country);
+		context.getLogger().log("Buscando por viagens para o pais => " + country);
 
-		final List<Trip> trips = this.repository.findByCity(trip, country);
+		try {
 
-		if (trips == null || trips.isEmpty()) {
-			return HandlerResponse.builder().setStatusCode(404).build();
+			final List<Trip> trips = this.repository.findByCountry(country);
+
+			if (trips == null || trips.isEmpty()) {
+				return HandlerResponse.builder().setStatusCode(404).build();
+			}
+			return HandlerResponse.builder().setStatusCode(200).setObjectBody(trips).build();
+		} catch (Exception e) {
+			return HandlerResponse.builder().setStatusCode(400).setRawBody("There is a error in persistence: \\n" + e.getMessage()).build();
 		}
-
-		return HandlerResponse.builder().setStatusCode(200).setObjectBody(trips).build();
-
-
 	}
 
 }

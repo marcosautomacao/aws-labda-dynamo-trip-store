@@ -33,6 +33,23 @@ Resources:
            Method: get
            RequestParameters:
             - method.request.querystring.city
+  GetTripsByCountryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+     CodeUri: ./target/onpaty-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+     Handler: br.com.rws.handler.GetTripsByCountry::handleRequest
+     Runtime: java8
+     Policies:
+       - DynamoDBCrudPolicy:
+           TableName: !Ref TripTable     
+     Events:
+       CreateTripRecord:
+         Type: Api
+         Properties:
+           Path: /trip/country/{country}
+           Method: get
+           RequestParameters:
+            - method.request.querystring.country  
   CreateTripRecordFunction:
     Type: AWS::Serverless::Function
     Properties:

@@ -24,15 +24,15 @@ public class GetTripsByCity implements RequestHandler<HandlerRequest, HandlerRes
 
 		try {
 
-		final List<Trip> trips = this.repository.findByCity(city);
+			final List<Trip> trips = this.repository.findByCity(city);
 
-		if (trips == null || trips.isEmpty()) {
-			return HandlerResponse.builder().setStatusCode(404).build();
+			if (trips == null || trips.isEmpty()) {
+				return HandlerResponse.builder().setStatusCode(404).build();
+			}
+			return HandlerResponse.builder().setStatusCode(200).setObjectBody(trips).build();
+		} catch (Exception e) {
+			return HandlerResponse.builder().setStatusCode(400).setRawBody("There is a error in persistence >>" + e.getMessage()).build();
 		}
-		return HandlerResponse.builder().setStatusCode(200).setObjectBody(trips).build();
-	} catch (Exception e) {
-		return HandlerResponse.builder().setStatusCode(400).setRawBody("There is a error in persistence >>" + e.getMessage()).build();
-	}
 	}
 
 }
